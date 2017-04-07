@@ -46,7 +46,7 @@ class mVector{
             mVector(const mVector & other) : mVector(other.size()){
                 for(int i=0; i<length; i++)
                 {
-                    data[i] = other.get(i);
+                    data[i] = other[i];
                 }
             }
 
@@ -66,13 +66,14 @@ class mVector{
                     return false;
 
                 for (int i=0; i<length; i++){
-                    if (data[i] != other.get(i))
+                    if (data[i] != other[i])
                     return false;
                 }
 
                 return true;
             }
 
+            //Add
             template<typename U>
             mVector<U> operator+ (const mVector<U> & other) const {
                 if (length != other.size()){    //Size missmatch
@@ -82,13 +83,41 @@ class mVector{
 
                 mVector<U> ret(other);
                 for(int i=0; i<length; i++){
-                    ret.set(i, ret.get(i)+data[i]);
+                    ret[i] += data[i];
                 }
 
 
                 return ret;
             }
 
+            //Subtract
+            template<typename U>
+            mVector<U> operator- (const mVector<U> & other) const {
+                if (length != other.size()){    //Size missmatch
+                    mVector<U> ret(0);
+                    return ret;
+                }
+
+                mVector<U> ret(other);
+                for(int i=0; i<length; i++){
+                    ret[i] -=data[i];
+                }
+
+
+                return ret;
+            }
+
+            mVector& operator= (const mVector<T> & other){
+                length = other.size();
+                data = new T[length];
+
+                for (int i=0; i<length; i++)
+                {
+                    data[i] = other[i];
+                }
+
+                return *this;
+            }
 
 
         //FUNCTIONS
@@ -96,12 +125,8 @@ class mVector{
                 return length;
             }
 
-            T get(int index) const {
+            T& operator[] (const int index) const{
                 return data[index];
-            }
-
-            void set(int index, T value){
-                data[index] = value;
             }
 
             //Prints a string reprensentation of this object
@@ -122,3 +147,29 @@ class mVector{
         T* data;
 
 };
+
+//Multiply vector with scalar
+template<typename T, typename U>
+mVector<T> operator*(const mVector<T>& lh, const U& rh){
+    mVector<T> ret(lh);
+
+    for (int i=0; i<lh.size(); i++)
+    {
+        ret[i] *= rh;
+    }
+
+    return ret;
+}
+
+//Multiply scaler with vector
+template<typename T, typename U>
+mVector<T> operator*(const U& lh, const mVector<T>& rh){
+    mVector<T> ret(rh);
+
+    for (int i=0; i<rh.size(); i++)
+    {
+        ret[i] *=  lh;
+    }
+
+    return ret;
+}

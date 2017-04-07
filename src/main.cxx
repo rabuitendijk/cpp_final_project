@@ -15,8 +15,12 @@ int test(){
     cout << "v == i: " << (v == i) << endl;
     cout << "i == i2: " << (i == i2) << endl;
     cout << (i+i2).toString() << endl;
+    cout << (i-i2).toString() << endl;
     cout << (i+v).toString() << endl;
-
+    cout << (i*-5).toString() << endl;
+    cout << (5*i).toString() << endl;
+    mVector<int> a = ((2*i)+i2);
+    cout << a.toString() << endl;
 
     return 0;
 }
