@@ -30,38 +30,72 @@ public:
  {
   if( row > this->rows || col > this->cols )
   {
-   std::cout << "the value to be added is out of bound matrix is " << this->rows << "x" << this->cols << " but value is (" << row << "," << col << ")" << std::endl;
+   std::cout << "the value to be added is out of bound, matrix is " << this->rows << "x" << this->cols << " but value is (" << row << "," << col << ")" << std::endl;
    return;
   }
   
   switch( this->type )
   {
    case Type::row : 
-    this->map.insert( std::pair<unsigned int,T>( col/this->cols+row , value ) );
+    this->map.insert( std::pair<unsigned int,T>( row*this->rows+col , value ) );
    break;
    case Type::col :
-    this->map.insert( std::pair<unsigned int,T>( row/this->rows+col , value ) );  
+    this->map.insert( std::pair<unsigned int,T>( col*this->cols+row , value ) );  
    break;
   }
   
   return;
  }
  
-
-//  std::string toString()
+//  T& operator[] ( unsigned int row , unsigned int col )
 //  {
-//   std::ostringstream string;
-//   
-//   for( std::size_t i=0; i<this->cols; i++ )
+//   if( row > this->rows || col > this->cols )
 //   {
-//    for( std::size_t j=0; j<this->rows; j++ )
-//    {
-//     if( this->map.find() )
-//     string << this->map
-//    }
+//    std::cout << "the value to be added is out of bound, matrix is " << this->rows << "x" << this->cols << " but value is (" << row << "," << col << ")" << std::endl;
+//    return;
 //   }
 //   
+//   return this->map[]; 
 //  }
+ 
+ std::string toString()
+ {
+  std::ostringstream string;
+  typename std::map<unsigned int,T>::iterator it;
+  
+  for( std::size_t i=0; i<this->cols; i++ )
+  {
+   for( std::size_t j=0; j<this->rows; j++ )
+   {
+    switch( this->type )
+    {
+     case Type::row : 
+      it = this->map.find( i*this->rows+j );
+      if( it != this->map.end() )
+       string << it->second << " ";
+      else
+       string << "0 ";
+     break;
+     case Type::col :
+      it = this->map.find( i+this->cols*j );
+      if( it != this->map.end() )
+       string << it->second << " ";
+      else
+       string << "0 ";
+     break;
+    }
+   }
+   string << std::endl;
+  }
+  
+  return string.str();
+ }
 
+ void print()
+ {
+  std::cout << this->toString() << std::endl;
+   
+  return;
+ }
 
 };
