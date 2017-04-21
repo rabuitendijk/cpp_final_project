@@ -1,9 +1,12 @@
 #include <iostream>
 #include <cstring>
+
 #include "mVector.h"
+#include "mMatrix_SingularMap.h"
+
 using namespace std;
 
-int test(){
+int test1(){
     cout << "test lives" << endl;
 
     mVector<double> v(5);
@@ -25,11 +28,35 @@ int test(){
     return 0;
 }
 
+/*
+int test2(){
+    cout << "test2 lives" << endl;
 
+    mMatrix_SingularMap<double> v(5, 5);
+	mMatrix_SingularMap<double> v0;
+	
+	for	(int i=0; i<5; i++){
+		for (int j=0; j<5; j++){
+			v.set(i,j, (double)(i+.5*j));
+		}
+	}
+	
+	cout << v.toString() << endl;
+	//cout << v.get(0,0) << endl;
+	//cout << v.get(4,0) << endl;
+	//cout << v.get(4,4)<< endl;
+	//cout << v.get(0,4)<< endl;
+	//v.set(0,7, 0);
+	//cout << v.get(0,7)<< endl;
+    return 0;
+}
+
+
+*/
 
 int main()
 {
-    test();
+    test1();
 
     return 0;
 }
