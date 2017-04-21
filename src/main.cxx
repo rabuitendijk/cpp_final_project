@@ -2,7 +2,8 @@
 #include <cstring>
 
 #include "mVector.h"
-#include "mMatrix_SingularMap.h"
+#include "mMatrix.h"
+#include "cg.cxx"
 
 using namespace std;
 
@@ -29,40 +30,29 @@ int test1(){
 	cout << v*i << endl;
 	cout << i.abs() << endl;
 	cout << i2.abs() << endl;
-	mVector<double> v2 = {1,-2,3,-4,5};	
+	mVector<double> v2 = {1,-2,3,-4,5};
 	cout << v2.abs() << endl;
     return 0;
 }
 
-/*
-int test2(){
-    cout << "test2 lives" << endl;
 
-    mMatrix_SingularMap<double> v(5, 5);
-	mMatrix_SingularMap<double> v0;
-	
-	for	(int i=0; i<5; i++){
-		for (int j=0; j<5; j++){
-			v.set(i,j, (double)(i+.5*j));
-		}
-	}
-	
-	cout << v.toString() << endl;
-	//cout << v.get(0,0) << endl;
-	//cout << v.get(4,0) << endl;
-	//cout << v.get(4,4)<< endl;
-	//cout << v.get(0,4)<< endl;
-	//v.set(0,7, 0);
-	//cout << v.get(0,7)<< endl;
+int test2(){
+    mMatrix<double> A(4,4);
+    mVector<double> b = {1,2,3,4};
+    mVector<double> guess = {1,1,1,12};
+
+    cout << cg<double>(A, b, guess, 0, 100).toString() << endl;
+
     return 0;
 }
 
 
-*/
+
 
 int main()
 {
     test1();
+    //test2();
 
     return 0;
 }
