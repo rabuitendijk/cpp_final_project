@@ -27,6 +27,10 @@ int test1(){
 
 	cout << i*i2 << endl;
 	cout << v*i << endl;
+	cout << i.abs() << endl;
+	cout << i2.abs() << endl;
+	mVector<double> v2 = {1,-2,3,-4,5};	
+	cout << v2.abs() << endl;
     return 0;
 }
 

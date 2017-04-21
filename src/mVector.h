@@ -142,8 +142,8 @@ class mVector{
                 return temp+">]";
             }
 			
-			T abs(){
-				T ret;
+			T abs() const{
+				T ret = 0;
 				for(int i=0; i<length; i++)
 				{
 					ret += std::abs(data[i]);
