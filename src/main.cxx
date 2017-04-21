@@ -25,6 +25,8 @@ int test1(){
     mVector<int> a = ((2*i)+i2);
     cout << a.toString() << endl;
 
+	cout << i*i2 << endl;
+	cout << v*i << endl;
     return 0;
 }
 

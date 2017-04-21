@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <cstring>
+#include <cmath>
 using namespace std;
 
 #include <string>
@@ -140,6 +141,15 @@ class mVector{
 
                 return temp+">]";
             }
+			
+			T abs(){
+				T ret;
+				for(int i=0; i<length; i++)
+				{
+					ret += std::abs(data[i]);
+				}
+				return ret;
+			}
 
 
     private:
@@ -170,6 +180,23 @@ mVector<T> operator*(const U& lh, const mVector<T>& rh){
     {
         ret[i] *=  lh;
     }
+
+    return ret;
+}
+
+//Dot product
+template<typename T, typename U>
+U operator*(const mVector<T>& lh, const mVector<U>& rh){
+    U ret = 0;
+	if (lh.size() != rh.size())
+	{
+		cout << "Dot product: opletten, vectors niet de zelvde groote." << endl;
+		return ret;
+	}
+
+    for(int i=0; i<lh.size(); i++){
+		ret += rh[i]*lh[i];
+	}
 
     return ret;
 }
