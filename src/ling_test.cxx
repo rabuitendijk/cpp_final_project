@@ -26,5 +26,11 @@ int main()
  
  m.print();
  
+ mMatrix<double> n = Identity<double>(col);
+ 
+ n.print();
+ 
+ n = m*n;
+ 
  return 0;
 }

@@ -36,11 +36,11 @@ mMatrix<T> operator*( mMatrix<T> m1 , mMatrix<T> m2 )
  }
  
  mMatrix<T> result( m1.rows() , m2.cols() );
-//  for( unsigned int i=0; i<m2.cols(); i++ )
-//  {
-//   for( unsigned int j=0; j<m1.rows(); j++ )
-//    result[{j,i}] = m1[{}]
-//  }
+ for( unsigned int i=0; i<m1.cols(); i++ )
+ {
+  for( unsigned int j=0; j<m2.rows(); j++ )
+   result[{j,i}] += m1[{i,j}]*m2[{i,j}];
+ }
   
  return result;
 }
@@ -49,7 +49,7 @@ mMatrix<T> operator*( mMatrix<T> m1 , mMatrix<T> m2 )
 template<typename T>
 mMatrix<T> Identity( const unsigned int& size )
 {
- mMatrix<T> I;
+ mMatrix<T> I( size , size );
  
  for( unsigned int i=0; i<size; i++ )
  {

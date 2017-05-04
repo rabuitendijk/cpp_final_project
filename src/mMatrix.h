@@ -31,7 +31,24 @@ public:
  {
   return this->n_rows*this->n_cols;
  }
-
+ 
+ typename std::map<unsigned int,T>::iterator getBegin()
+ { return this->map.begin(); }
+ 
+ typename std::map<unsigned int,T>::iterator getEnd()
+ { return this->map.end(); }
+ 
+ operator=( mMatrix<T> m )
+ {
+  this->map = std::map<unsigned int,T>();
+  
+  typename std::map<unsigned int,T>::iterator it;
+  
+  for( it = this->getBegin(); it != this->getEnd(); it++ )
+   map( map.begin()+it ) = it->second;
+  
+ }
+ 
  void insert( const unsigned int& row , const unsigned int& col , const T& value )
  {
   if( row > this->rows() || col > this->cols() )
