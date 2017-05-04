@@ -3,8 +3,8 @@
 
 #include "mVector.h"
 #include "mMatrix.h"
-#include "cg.cxx"
 #include "Test.cpp"
+#include "mMath.h"
 
 using namespace std;
 
@@ -28,20 +28,6 @@ int test1(){
 	
     return 0;
 }
-
-
-int test2(){
-    mMatrix<double> A(4,4);
-    mVector<double> b = {1,2,3,4};
-    mVector<double> guess = {1,1,1,12};
-
-    cout << cg<double>(A, b, guess, 0, 100).toString() << endl;
-
-    return 0;
-}
-
-
-
 
 int main()
 {
