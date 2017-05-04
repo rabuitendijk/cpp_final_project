@@ -141,20 +141,33 @@ class mVector{
 
                 return temp+">]";
             }
+            
+            void print(){
+	string r = "";
+	if (length == 0)
+	    cout << r << endl;
+	    
+	for(int i=0; i<length; i++){
+	        r += to_string(data[i]) + " ";
+	    }
+	    
+	    cout << r << endl;
+	}
 			
-			T abs() const{
-				T ret = 0;
-				for(int i=0; i<length; i++)
-				{
-					ret += std::abs(data[i]);
-				}
-				return ret;
-			}
+            T abs() const{
+	            T ret = 0;
+	            for(int i=0; i<length; i++)
+	            {
+		            ret += std::abs(data[i]);
+	            }
+	            return ret;
+            }
 
 
     private:
         int length;
         T* data;
+        
 
 };
 

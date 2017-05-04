@@ -32,6 +32,11 @@ int test1(){
 	cout << i2.abs() << endl;
 	mVector<double> v2 = {1,-2,3,-4,5};
 	cout << v2.abs() << endl;
+	
+	v.print();
+	i.print();
+	i2.print();
+	
     return 0;
 }
 
