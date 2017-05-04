@@ -27,7 +27,11 @@ class mVector{
             mVector() : length(0), data(nullptr){};
 
             //Empty constructor
-            mVector(int length) : length(length), data(new T[length]){};
+            mVector(int length) : length(length), data(new T[length]){
+	        for (int i=0; i<length; i++){
+	            data[i] = 0;
+	        }
+	};
 
 
             //initializer_list contructor
