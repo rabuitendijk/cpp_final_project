@@ -35,8 +35,34 @@ mMatrix<T> operator*( mMatrix<T> m1 , mMatrix<T> m2 )
   return mMatrix<T>( m1.rows(),m2.cols() );
  }
  
- 
+ mMatrix<T> result( m1.rows() , m2.cols() );
+//  for( unsigned int i=0; i<m2.cols(); i++ )
+//  {
+//   for( unsigned int j=0; j<m1.rows(); j++ )
+//    result[{j,i}] = m1[{}]
+//  }
+  
+ return result;
 }
+
+//create indentity matrix
+template<typename T>
+mMatrix<T> Identity( const unsigned int& size )
+{
+ mMatrix<T> I;
+ 
+ for( unsigned int i=0; i<size; i++ )
+ {
+  for( unsigned int j=0; j<size; j++ )
+  {
+   if( i == j )
+    I[{j,i}] = 1;
+  }
+ }
+ 
+ return I;
+}
+
 
 //Dot product
 template<typename T, typename U>
