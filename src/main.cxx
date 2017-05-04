@@ -4,27 +4,16 @@
 #include "mVector.h"
 #include "mMatrix.h"
 #include "cg.cxx"
+#include "Test.cpp"
 
 using namespace std;
 
 int test1(){
-    cout << "test lives" << endl;
 
     mVector<double> v(5);
     mVector<int> i = {1,2,3,4,5,6,7};
     mVector<int> i2 = {1,2,3,4,5,6,7};
-    cout << v.toString() << endl;
-    cout << i.toString() << endl;
-
-    cout << "v == i: " << (v == i) << endl;
-    cout << "i == i2: " << (i == i2) << endl;
-    cout << (i+i2).toString() << endl;
-    cout << (i-i2).toString() << endl;
-    cout << (i+v).toString() << endl;
-    cout << (i*-5).toString() << endl;
-    cout << (5*i).toString() << endl;
     mVector<int> a = ((2*i)+i2);
-    cout << a.toString() << endl;
 
 	cout << i*i2 << endl;
 	cout << v*i << endl;
@@ -57,7 +46,7 @@ int test2(){
 int main()
 {
     test1();
-    //test2();
+    Test::run();
 
     return 0;
 }

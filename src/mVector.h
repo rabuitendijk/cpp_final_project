@@ -24,7 +24,7 @@ class mVector{
     public:
         //CONSTRUCTORS AND DESTRUCTORS
             //Default constructor
-            mVector() : length(0){};
+            mVector() : length(0), data(nullptr){};
 
             //Empty constructor
             mVector(int length) : length(length), data(new T[length]){};
@@ -99,9 +99,9 @@ class mVector{
                     return ret;
                 }
 
-                mVector<U> ret(other);
+                mVector<U> ret(*this);
                 for(int i=0; i<length; i++){
-                    ret[i] -=data[i];
+                    ret[i] -=other[i];
                 }
 
 
