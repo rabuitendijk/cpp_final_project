@@ -9,7 +9,7 @@ mVector<T> operator*( mMatrix<T> m , const mVector<T>& v )
 {
  if( m.cols() != (unsigned int)v.size() )
  {
-  std::cout << "matrix and vectors have different sizes and can not be multiplied" << std::endl;
+  std::cerr << "matrix and vectors have different sizes and can not be multiplied" << std::endl;
   return mVector<T>( v.size() );
  }
  
@@ -23,6 +23,19 @@ mVector<T> operator*( mMatrix<T> m , const mVector<T>& v )
  }
  
  return result;
+}
+
+//matrix matrix multiplication
+template<typename T>
+mMatrix<T> operator*( mMatrix<T> m1 , mMatrix<T> m2 )
+{
+ if( m1.cols() != m2.rows() )
+ {
+  std::cerr << "cols of matrix1 are not equal to rows of matrix2" << std::endl;
+  return mMatrix<T>( m1.rows(),m2.cols() );
+ }
+ 
+ 
 }
 
 //Dot product
@@ -41,3 +54,4 @@ U operator*(const mVector<T>& lh, const mVector<U>& rh){
 
     return ret;
 }
+

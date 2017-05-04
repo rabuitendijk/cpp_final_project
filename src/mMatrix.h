@@ -71,6 +71,9 @@ public:
    break;
   }
 
+  if( map.find( index ) == map.end() )
+   map[index] = 0;
+  
   return this->map[index];
  }
 
