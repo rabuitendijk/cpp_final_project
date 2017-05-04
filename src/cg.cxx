@@ -4,10 +4,10 @@
 #include "mVector.h"
 #include "mMatrix.h"
 using namespace std;
-
+#include "mMath.h"
 #include <string>
 #include <sstream>
-
+#include <cmath>
 
 //Windows tostring support
 /*template < typename T >
@@ -21,50 +21,42 @@ string to_string( const T& n )
 template<typename T>
 mVector<T> cg(const mMatrix<T> &A, const mVector<T> &b, mVector<T> &x, T tol, int maxiter)
 {
+        mVector <T> Ap;
+        T rsnew;
+        T alpha;
 
-    //mVector <T> p_k=b-A*x;
-    mVector <T> p_k=b;//FIXME
+        mVector <T> r=b-A*x;
+        mVector <T> p=r;
+        cout<<(p).toString()<<endl;
+        T rsold = r*r;
 
-    mVector <T> r_k=p_k;
-    mVector <T> x_k=x;
+        int c = 0;
 
-    mVector<T> p_k1;
-    T beta_k;
-    T alpha_k;
-    mVector<T> x_k1;
-    mVector<T> r_k1;
+        for(int i=0;i<maxiter;i++){
+            Ap=A*p;
+            cout<<(A*p).toString()<<endl;
+            if (p*Ap == 0) return x; //residual is 0
 
-    T test;
-    cout<<"ik ben net voor de loop"<<endl;
-    for (int k = 0;k < maxiter; k++)
-    {
+            alpha=(rsold)/(p*Ap);
+            cout<<(p*Ap)<<endl;
+            x = x + alpha * p;
+            r = r - alpha * Ap;
+            rsnew= (r*r);
 
-         //alpha_k= (r_k*r_k)/(r_k * (A*p_k));
-         test = (r_k * p_k);
-         cout << to_string(test) << endl;
+            if (pow(rsnew,0.5)<tol){
+                cout << "passed tolerance test." << endl;
+                break;
+            }
+            if (rsold == 0) return x; //residual is 0
+            p=r+(rsnew/rsold)*p;
+            rsold=rsnew;
 
-         alpha_k= (r_k*r_k)/(r_k * p_k);//FIXME
-         cout<< k<<endl;
-         x_k1=x_k+alpha_k*p_k;
-         //r_k1=r_k-alpha_k*(A*p_k);
-         r_k1=r_k-alpha_k*(p_k);//FIXME
-
-         // tolerance
-         if (r_k1.abs()< tol){
-            return x_k1;
-         }
-
-         beta_k=(r_k1*r_k1)/(r_k*r_k);
-         p_k1=r_k1+beta_k*p_k;
-
-         // update new values
-         p_k=p_k1;
-         r_k=r_k1;
-         x_k=x_k1;
-
-    }
-
-
-    return x_k1;
+            c ++;
+            if (c > 100){
+                c = 1;
+                cout<<i<<endl;
+            }
+        }
+    return x;
 }
 
