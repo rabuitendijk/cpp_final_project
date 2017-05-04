@@ -12,7 +12,7 @@ mVector<T> operator*( mMatrix<T> m , const mVector<T>& v )
   return mVector<T>( v.size() );
  }
  
- mVector<T> result( v.size() );
+ mVector<T> result( m.rows() );
  for( unsigned int i=0; i<m.rows(); i++ )
  {
   for( unsigned int j=0; j<m.cols(); j++ )
