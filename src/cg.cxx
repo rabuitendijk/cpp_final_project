@@ -64,7 +64,7 @@ mVector<T> cg_2(const mMatrix<T> &A, const mVector<T> &b, mVector<T> &x, T tol, 
 
         T alpha, rsnew, beta;
         for(int i=0;i<maxiter;i++){
-            alpha = (r*r)/(p*p);
+            alpha = (r*r)/(p*(A*p));
             x = x + alpha * p;
             
             x.print();
