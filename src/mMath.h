@@ -66,18 +66,18 @@ mMatrix<T> Identity( const unsigned int& size )
 
 //Dot product
 template<typename T, typename U>
-U operator*(const mVector<T>& lh, const mVector<U>& rh){
-    U ret = 0;
+U operator*(const mVector<T>& lh, const mVector<U>& rh)
+{
+ U ret = 0;
  if (lh.size() != rh.size())
  {
-  cout << "Dot product: opletten, vectors niet de zelvde groote." << endl;
+  cout << "Dot product: opletten, vectors niet de zelfde groote." << endl;
   return ret;
  }
 
-    for(int i=0; i<lh.size(); i++){
+ for(int i=0; i<lh.size(); i++)
   ret += rh[i]*lh[i];
- }
 
-    return ret;
+ return ret;
 }
 
