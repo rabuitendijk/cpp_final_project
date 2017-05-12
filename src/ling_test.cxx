@@ -28,9 +28,9 @@ int main()
  
  mMatrix<double> n = Identity<double>(col);
  
- n.print();
+ n = m;
  
- n = m*n;
+ n.print();
  
  return 0;
 }
