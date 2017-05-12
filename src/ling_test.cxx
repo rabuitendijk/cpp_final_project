@@ -19,18 +19,20 @@ int main()
 
  mVector<double> u = m*v;
  
+ m.print();
+
  v.print();
  u.print();
  
  std::cout << std::endl;
- 
- m.print();
- 
  mMatrix<double> n = Identity<double>(col);
- 
- n = m;
- 
  n.print();
+ 
+ 
+ 
+ mMatrix<double> test_list(3,3);
+ test_list.insertList( {1,2,3,4,5,6,7,8,9} );
+ test_list.print();
  
  return 0;
 }

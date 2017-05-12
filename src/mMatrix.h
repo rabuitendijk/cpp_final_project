@@ -21,6 +21,32 @@ private:
  
  Type type;
  
+ unsigned int getRow( const unsigned int& Index )
+ {
+  switch( this->type )
+  {
+   case Type::row :
+    return Index/this->rows();
+   break;
+   case Type::col :
+    return Index/this->cols();
+   break;
+  }
+ }
+ 
+ unsigned int getCol( const unsigned int& Index )
+ {
+  switch( this->type )
+  {
+   case Type::row :
+    return Index - Index/this->rows()*this->cols();
+   break;
+   case Type::col :
+    return Index - Index/this->cols()*this->rows();
+   break;
+  }
+ }
+ 
  unsigned int getIndex( const unsigned int& row , const unsigned int& col )
  {
   switch( this->type )
@@ -51,17 +77,17 @@ public:
  typename std::map<unsigned int,T>::iterator getEnd()
  { return this->map.end(); }
  
- mMatrix<T>& operator=( mMatrix<T> m )
- {
-  this->map = std::map<unsigned int,T>();
-  
-  typename std::map<unsigned int,T>::iterator it;
-  
-  for( it = this->getBegin(); it != this->getEnd(); it++ )
-   this->map[it->first] = it->second;
-  
-  return *this;
- }
+//  mMatrix<T>& operator=( mMatrix<T> m )
+//  {
+//   this->map = std::map<unsigned int,T>();
+//   
+//   typename std::map<unsigned int,T>::iterator it;
+//   
+//   for( it = m.getBegin(); it != m.getEnd(); it++ )
+//    this->map[it->first] = it->second;
+//   
+//   return *this;
+//  }
  
  void insert( const unsigned int& row , const unsigned int& col , const T& value )
  {
@@ -111,6 +137,25 @@ public:
    map[index] = 0;
   
   return this->map[index];
+ }
+ 
+ void insertList( std::initializer_list<T> list )
+ {
+  if( list.size() != this->size() )
+  {
+   std::cerr << "list size and matrix size are not equal" << std::endl;
+   return;
+  }
+  
+  typename std::initializer_list<T>::iterator it;
+  unsigned int counter = 0;
+  for( it=list.begin(); it!=list.end(); it++ )
+  {
+   this->insert( getRow(counter) , getCol(counter) , *it );
+   counter++;
+  }
+  
+//   return *this;
  }
 
  std::string toString()
