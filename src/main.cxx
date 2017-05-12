@@ -30,10 +30,18 @@ int test1(){
     return 0;
 }
 int test2(){
-mMatrix<double> A = Identity<double>(4);
+mMatrix<double> A(6,6);
+    A.insertList({1.0000 ,        0 ,        0 ,        0 ,        0,         0,
+   25.0000,  -50.0000,   25.0000,         0,         0 ,        0,
+         0,   25.0000,  -50.0000, 25.0000,         0 ,        0,
+         0,         0,   25.0000 , -50.0000 ,  25.0000,         0,
+         0 ,        0 ,        0,   25.0000,  -50.0000,   25.0000,
+    0 ,        0 ,        0,         0,         0 ,   1.0000});
 
-mVector<double> b={1,2,3,4};
-mVector<double> guess={1.23984723984,8,3,4.5};
+A.print();
+
+mVector<double> b={1,2,3,4,5,6};
+mVector<double> guess={1,1,1,1,1,1};
 
 cout<< cg<double>(A,b,guess,0.0001,100).toString() << endl;
 
