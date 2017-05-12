@@ -21,7 +21,7 @@ private:
  
  Type type;
  
- unsigned int getRow( const unsigned int& Index )
+ unsigned int IndexToRow( const unsigned int& Index )
  {
   switch( this->type )
   {
@@ -34,7 +34,7 @@ private:
   }
  }
  
- unsigned int getCol( const unsigned int& Index )
+ unsigned int IndexToCol( const unsigned int& Index )
  {
   switch( this->type )
   {
@@ -47,7 +47,7 @@ private:
   }
  }
  
- unsigned int getIndex( const unsigned int& row , const unsigned int& col )
+ unsigned int RowColToIndex( const unsigned int& row , const unsigned int& col )
  {
   switch( this->type )
   {
@@ -85,7 +85,7 @@ public:
    return;
   }
 
-  this->map.insert( std::pair<unsigned int,T>( getIndex( row , col ) , value ) );
+  this->map.insert( std::pair<unsigned int,T>( RowColToIndex( row , col ) , value ) );
 
   return;
  }
@@ -99,7 +99,7 @@ public:
 
   unsigned int index;
   
-  index = getIndex( array[0] , array[1] );
+  index = RowColToIndex( array[0] , array[1] );
 
   if( map.find( index ) == map.end() )
    map[index] = 0;
@@ -119,7 +119,7 @@ public:
   unsigned int counter = 0;
   for( it=list.begin(); it!=list.end(); it++ )
   {
-   this->insert( getRow(counter) , getCol(counter) , *it );
+   this->insert( IndexToRow(counter) , IndexToCol(counter) , *it );
    counter++;
   }
   
@@ -135,7 +135,7 @@ public:
   {
    for( std::size_t j=0; j<this->cols(); j++ )
    {
-    it = this->map.find( getIndex(i,j) );
+    it = this->map.find( RowColToIndex(i,j) );
     
     if( it != this->map.end() )
      string << it->second << " ";
