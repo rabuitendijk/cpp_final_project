@@ -27,19 +27,18 @@ mVector<T> cg(const mMatrix<T> &A, const mVector<T> &b, mVector<T> &x, T tol, in
 
         mVector <T> r=b-A*x;
         mVector <T> p=r;
-        cout<<(p).toString()<<endl;
         T rsold = r*r;
 
-        int c = 0;
 
         for(int i=0;i<maxiter;i++){
             Ap=A*p;
-            cout<<(A*p).toString()<<endl;
             if (p*Ap == 0) return x; //residual is 0
 
             alpha=(rsold)/(p*Ap);
-            cout<<(p*Ap)<<endl;
             x = x + alpha * p;
+            
+            x.print();
+            
             r = r - alpha * Ap;
             rsnew= (r*r);
 
@@ -51,11 +50,35 @@ mVector<T> cg(const mMatrix<T> &A, const mVector<T> &b, mVector<T> &x, T tol, in
             p=r+(rsnew/rsold)*p;
             rsold=rsnew;
 
-            c ++;
-            if (c > 100){
-                c = 1;
-                cout<<i<<endl;
+        }
+    return x;
+}
+
+//Version 2
+template<typename T>
+mVector<T> cg_2(const mMatrix<T> &A, const mVector<T> &b, mVector<T> &x, T tol, int maxiter)
+{
+        mVector <T> r=b-A*x;
+        mVector <T> rk;
+        mVector <T> p=r;
+
+        T alpha, rsnew, beta;
+        for(int i=0;i<maxiter;i++){
+            alpha = (r*r)/(p*p);
+            x = x + alpha * p;
+            
+            x.print();
+            rk = r;
+            r = r - alpha*(A*p);
+            rsnew= (r*r);
+
+            if (pow(rsnew,0.5)<tol){
+                cout << "passed tolerance test." << endl;
+                break;
             }
+            beta = (r*r)/(rk*rk);
+            p=r+beta*p;
+
         }
     return x;
 }

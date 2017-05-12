@@ -30,20 +30,18 @@ int test1(){
     return 0;
 }
 int test2(){
-mMatrix<double> A(6,6);
-    A.insertList({1.0000 ,        0 ,        0 ,        0 ,        0,         0,
-   25.0000,  -50.0000,   25.0000,         0,         0 ,        0,
-         0,   25.0000,  -50.0000, 25.0000,         0 ,        0,
-         0,         0,   25.0000 , -50.0000 ,  25.0000,         0,
-         0 ,        0 ,        0,   25.0000,  -50.0000,   25.0000,
-    0 ,        0 ,        0,         0,         0 ,   1.0000});
+mMatrix<double> A(3,3);
+    A.insertList({
+   11.8200 ,   0.7500,    2.4000,
+    0.7500 ,   0.2900 ,   0.7000,
+    2.4000    ,0.7000 ,  26.0000});
 
 A.print();
 
-mVector<double> b={1,2,3,4,5,6};
-mVector<double> guess={1,1,1,1,1,1};
+mVector<double> b={1,2,3};
+mVector<double> guess={0,0,0};
 
-cout<< cg<double>(A,b,guess,0.0001,100).toString() << endl;
+cout<< cg_2<double>(A,b,guess,0.0001,100).toString() << endl;
 
 
 
