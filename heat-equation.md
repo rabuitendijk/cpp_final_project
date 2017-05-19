@@ -11,26 +11,30 @@ Introduction
 
 Consider the following initial boundary value problem:
 
-```math
+\begin{equation}
 \frac{\partial u}{\partial t}-\alpha\Delta u = 0 \quad \text{on }\Omega,
-```
-```math
+\end{equation}
+
+\begin{equation}
 u(\vec{x},t)=0 \quad \forall \vec{x}\in\partial\Omega,
-```
-```math
+\end{equation}
+
+\begin{equation}
 u(\vec{x},0)=\prod_{k=0}^{n-1}\sin(\pi x_k)\quad \forall \vec{x}\in\Omega
-```
+\end{equation}
+
 where $`n`$ is the number of dimensions of the domain, $`\Omega = [0,1]^n`$ is the domain
 (the unit square in 2D or the unit cube in 3D), $`\partial\Omega`$ is the boundary of the
 domain, $`u`$ is the temperature as a function of space $`\vec{x} \in \mathbb{R}^n`$ and time $`t`$ and
 $`\Delta`$ is the [Laplace operator], in an $`n`$-dimensional space given by
-```math
+\begin{equation}
 \Delta := \sum_{k=0}^{n-1}\frac{\partial^2}{\partial x_k^2}
-```
+\end{equation}
+
 The exact solution to above initial boundary value problem is given by
-```math
+\begin{equation}
 u(\vec{x},t)=e^{-n\pi^2\alpha t}\prod_{k=0}^{n-1}\sin(\pi x_k)=e^{-n\pi^2\alpha t}u(x,0)
-```
+\end{equation}
 
 We are going to apply a finite difference discretisation. We create a mesh of
 $`m^n`$ equidistant interior nodes, $`m`$ nodes per dimension, hence the distance
@@ -63,29 +67,32 @@ illustrates a two-dimensional mesh with $`m=3`$:
 Approximating the [Laplace operator] with a second order central [finite
 difference] discretisation and the remaining semi-discrete differential equation
 with the [Backward Euler method] gives the following system of equations
-```math
+\begin{equation}
 Mw_{l+1}=w_l
-```
+\end{equation}
 
 where vector $`w_l \in\mathbb{R}^{m^n}`$ is the discrete approximation of the heat $`u`$ at time
 $`t=l \Delta t`$, with vector component $`i`$ refering to node $`i`$.  The matrix $`M`$ is
 given by
-```math
+\begin{equation}
 M_{ij} = I_{ij}-\alpha\frac{\Delta t}{\Delta x^2}\sum_{k=0}^{n-1}D_{kij}\quad\forall i,j \in \{ 0,1,...,m^n\}
-```
+\end{equation}
+
 
 
 where $`I`$ is the identity matrix and $`D_k`$ is the discrete approximation of the
 second order derivative in dimension $`k \in \{0,1,...,n-1\}`$:
-```math
+\begin{equation}
 D_{kij}=-2\quad \text{if } j=i
-```
-```math
+\end{equation}
+
+\begin{equation}
 D_{kij}=1\quad \text{if } j \text{ is a left neighbour of } i \text{ in dimension }k
-```
-```math
+\end{equation}
+
+\begin{equation}
 D_{kij}=1\quad \text{if } j \text{ is a right neighbour of } i \text{ in dimension }k
-```
+\end{equation}
 
 **Note:** Not all nodes have left or right neighbours in every dimension.  In
 the example mesh given above node $`0`$ has only right neighbours: node $`1`$ in
@@ -99,15 +106,15 @@ $`t`$, which should be a multiple of $`\Delta t`$:
 
 1.  Create the initial solution vector `w_0` by sampling the initial condition
     $`u(\vec{x},0)`$ at the interior nodes:
-    ```math
+    \begin{equation}
     w_{0i} = w(x_i,0).
-    ```
+    \end{equation}
 
 2.  For $`l = 0,1,..., (t/\Delta t)-1`$: solve the following linear problem for
     $`w_{l+1}`$:
-    ```math
+    \begin{equation}
     M w_{l+1} = w_l.
-    ```
+    \end{equation}
 
 [Laplace operator]: https://en.wikipedia.org/wiki/Laplace_operator
 [finite difference]: https://en.wikipedia.org/wiki/Finite_difference
